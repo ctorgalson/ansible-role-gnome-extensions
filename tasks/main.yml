@@ -16,6 +16,13 @@
 
 - name: Add, remove, install, and uninstall extensions.
   block:
+    - name: Ensure extensions directory exists.
+      ansible.builtin.file:
+        path: "{{ gnome_extensions_dir }}"
+        state: directory
+        owner: "{{ gnome_user }}"
+        group: "{{ gnome_user }}"
+
     - name: Create a temporary working directory.
       ansible.builtin.tempfile:
         state: directory
